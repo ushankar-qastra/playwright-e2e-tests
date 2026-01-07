@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "Playwright using MCP",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "demo": "npx playwright test tests/demo/first-test.spec.ts --headed",
+    "login": "npx playwright test tests/functional/login.spec.ts --headed",
+    "demo:firefox": "npx playwright test tests/demo/mytest.spec.ts --project=firefox --headed"
+  },
   "keywords": [
     "playwright",
     "playwright-e2e-tests",
