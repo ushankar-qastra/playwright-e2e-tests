@@ -4,6 +4,16 @@
   "description": "Playwright using MCP",
   "main": "index.js",
   "scripts": {
+    "demo:parallel:worker": "npx playwright test --workers=3",
+    "demo:parallel": "npx playwright test --grep \"@smoke\"",
+    "pw-debug": "DEBUG=pw:api npx playwright test --grep \"@smoke\" --headed",
+    "demo:tag": "npx playwright test --grep \"@smoke\" --headed",
+    "debug:trace": "npx playwright test tests/functional/inventory.spec.ts --trace on",
+    "debug:cli": "PWDEBUG=1 npx playwright test tests/functional/inventory.spec.ts",
+    "debug:ui": "npx playwright test tests/functional/inventory.spec.ts --ui --headed",
+    "debug": "npx playwright test tests/functional/inventory.spec.ts --headed",
+    "inventory": "npx playwright test tests/functional/inventory.spec.ts --headed",
+    "make-apt": "npx playwright test tests/functional/make.apnmnt.spec.ts --headed",
     "demo": "npx playwright test tests/demo/first-test.spec.ts --headed",
     "login": "npx playwright test tests/functional/login.spec.ts --headed",
     "demo:firefox": "npx playwright test tests/demo/mytest.spec.ts --project=firefox --headed"
@@ -17,6 +27,8 @@
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.57.0",
-    "@types/node": "^25.0.3"
+    "@types/node": "^25.0.3",
+    "allure-playwright": "^3.4.4",
+    "dotenv": "^17.2.3"
   }
 }

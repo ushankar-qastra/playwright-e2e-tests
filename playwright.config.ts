@@ -4,9 +4,9 @@ import { defineConfig, devices } from "@playwright/test";
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
+import dotenv = require("dotenv");
+import path = require("node:path");
+dotenv.config({ path: path.resolve(__dirname, ".env") });
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -22,7 +22,28 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: "html",
+  globalSetup: require.resolve("./tests/helpers/global-setup"),
+  globalTeardown: require.resolve("./tests/helpers/global-teardown"),
+  reporter: [
+    [
+      "html",
+      {
+        open: "never", // Don't auto-open HTML report
+      },
+    ],
+    [
+      "allure-playwright",
+      {
+        detail: true,
+        suiteTitle: true,
+        environmentInfo: {
+          name: "TEST",
+          Release: "Release 1.1",
+          node_version: process.version,
+        },
+      },
+    ],
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
@@ -32,6 +53,8 @@ export default defineConfig({
     trace: "on-first-retry",
     ignoreHTTPSErrors: true,
     navigationTimeout: 30_000,
+    screenshot: "only-on-failure",
+    video: "retain-on-failure",
   },
 
   /* Configure projects for major browsers */
