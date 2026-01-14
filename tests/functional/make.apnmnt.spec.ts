@@ -1,16 +1,21 @@
 import { test, expect } from "@playwright/test";
+import { log } from "../helpers/logger";
 
 test.describe("Make appointment", () => {
-  test.beforeEach("Login with valid cred", async ({ page }) => {
-    await page.goto("https://katalon-demo-cura.herokuapp.com/");
+  test.beforeEach("Login with valid cred", async ({ page }, testInfo) => {
+    const envConfig = testInfo.project.use as any;
+    await log("info", `Launching the web app in ${envConfig.envName}`);
+
+    await page.goto(envConfig.appURL);
     await expect(page).toHaveTitle("CURA Healthcare Service");
     await expect(page.locator("//h1")).toHaveText("CURA Healthcare Service");
     await page.getByRole("link", { name: "Make Appointment" }).click();
     await expect(page.getByText("Please login to make")).toBeVisible();
-    await page.getByLabel("Username").fill("John Doe");
-    await page.getByLabel("Password").fill("ThisIsNotAPassword");
+    await page.getByLabel("Username").fill(process.env.TEST_USER_NAME);
+    await page.getByLabel("Password").fill(process.env.TEST_PASSWORD);
     await page.getByRole("button", { name: "Login" }).click();
     await expect(page.locator("h2")).toContainText("Make Appointment");
+    await log("info", "The login is successful...");
   });
   test("Should make an appointment with non default values", async ({
     page,

@@ -11,4 +11,6 @@ export default async function globalSetup(config: FullConfig) {
       fs.rmSync(resultDir, { recursive: true, force: true });
     }
   }
+
+  process.env.LoginCookies = undefined;
 }
