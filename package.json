@@ -7,7 +7,7 @@
     "test-api": "npx playwright test --config=config/test.playwright.config.ts tests/api/users.api.spec.ts",
     "test-e2e": "npx playwright test --config=config/test.playwright.config.ts tests/e2e/nopcommerce.e2e.spec.ts --headed",
     "dev-env-make-apt": "npx playwright test --config=config/dev.playwright.config.ts tests/functional/make.apnmnt.spec.ts --headed",
-    "test-env-make-apt": "npx playwright test --config=config/test.playwright.config.ts tests/functional/make.apnmnt.spec.ts --headed",
+    "test:make-apt": "npx playwright test --config=config/test.playwright.config.ts tests/functional/make.apnmnt.spec.ts --headed",
     "param:demo": "npx playwright test tests/demo/params.make.apnmnt.spec.ts --headed",
     "demo:parallel:worker": "npx playwright test --workers=3",
     "demo:parallel": "npx playwright test --grep \"@smoke\"",
