@@ -21,6 +21,7 @@
     "make-apt": "npx playwright test tests/functional/make.apnmnt.spec.ts --headed",
     "demo": "npx playwright test tests/demo/first-test.spec.ts --headed",
     "login": "npx playwright test tests/functional/login.spec.ts --headed",
+    "multi-window": "npx playwright test -c config/test.playwright.config.ts tests/functional/multi.window.spec.ts --headed",
     "demo:firefox": "npx playwright test tests/demo/mytest.spec.ts --project=firefox --headed"
   },
   "keywords": [

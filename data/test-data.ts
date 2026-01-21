@@ -32,4 +32,13 @@ export default class TestData {
       },
     ];
   }
+
+  static multiWindowData() {
+    return {
+      homeUrl: "https://the-internet.herokuapp.com/",
+      windowsUrl: "https://the-internet.herokuapp.com/windows",
+      newWindowTitle: "New Window",
+      newWindowHeader: "New Window",
+    };
+  }
 }
